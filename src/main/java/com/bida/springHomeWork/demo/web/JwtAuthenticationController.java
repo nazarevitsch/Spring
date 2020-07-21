@@ -7,7 +7,6 @@ import com.bida.springHomeWork.demo.web.vm.JwtRequest;
 import com.bida.springHomeWork.demo.web.vm.JwtResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,6 +31,7 @@ public class JwtAuthenticationController {
         jwtAuthenticationService.authenticate(jwtRequest.getUsername(), jwtRequest.getPassword());
         final UserDetails userDetails = userDetailsService.loadUserByUsername(jwtRequest.getUsername());
         final String token = jwtTokenUtil.generateToken(userDetails);
+        System.out.println(token);
         return ResponseEntity.ok(new JwtResponse(token));
     }
 }

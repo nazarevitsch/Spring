@@ -16,7 +16,7 @@ import java.util.function.Function;
 @Component
 public class JwtTokenUtil implements Serializable {
 
-    @Value("${jwt.ciferKay}")
+    @Value("jwt.cipherKay")
     private String secret;
 
     private static  final long JWT_TOKEN = 5 * 60 * 60;
@@ -46,12 +46,12 @@ public class JwtTokenUtil implements Serializable {
     public String doGenerateToken(Map<String, Object> claims, String subject){
         return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN * 1000))
-                .signWith(SignatureAlgorithm.ES512, secret).compact();
+                .signWith(SignatureAlgorithm.HS512, secret).compact();
     }
 
     public Boolean validateToken(String token, UserDetails userDetails){
-        String username =getUserNameFromToken(token);
-        return (username.equals(userDetails.getUsername()) && isTokenExpired(token));
+        String username = getUserNameFromToken(token);
+        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
 
     private Boolean isTokenExpired(String token){

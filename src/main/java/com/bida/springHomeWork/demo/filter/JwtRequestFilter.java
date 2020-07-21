@@ -1,6 +1,5 @@
 package com.bida.springHomeWork.demo.filter;
 
-
 import com.bida.springHomeWork.demo.config.JwtTokenUtil;
 import com.bida.springHomeWork.demo.service.JwtUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,10 +29,12 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
         String requestTokenHeader = httpServletRequest.getHeader("Authorization");
+        System.out.println(requestTokenHeader);
+        //.getParameter("Authorization");
         String username = null;
         String jwtToken = null;
-        if(requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
-            jwtToken = requestTokenHeader.substring(7);
+        if(requestTokenHeader != null && requestTokenHeader.startsWith("Bearer")) {
+            jwtToken = requestTokenHeader.substring(6);
             username = jwtTokenUtil.getUserNameFromToken(jwtToken);
         }
         else {
