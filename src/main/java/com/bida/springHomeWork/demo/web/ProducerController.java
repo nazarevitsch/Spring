@@ -17,7 +17,7 @@ public class ProducerController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public List<Producer> getProducers(@RequestParam("Authorization") String token){
+    public List<Producer> getProducers(@RequestHeader("Authorization") String token){
         return producerService.findAllProducer();
     }
 }
