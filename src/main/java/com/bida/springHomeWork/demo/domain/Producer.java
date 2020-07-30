@@ -1,11 +1,9 @@
 package com.bida.springHomeWork.demo.domain;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 
 @Entity
@@ -13,13 +11,15 @@ import javax.persistence.Table;
 public class Producer {
 
     @Id
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name = "increment", strategy = "increment")
     @Column(name = "id")
     private Long id;
 
     @Column(name = "name")
     private String name;
 
-
+    public Producer(){}
 
     public Long getId() {
         return id;
@@ -35,5 +35,13 @@ public class Producer {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Producer{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

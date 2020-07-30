@@ -16,4 +16,13 @@ public class ProducerService {
     public List<Producer> findAllProducer(){
         return producerRepository.findAll();
     }
+
+
+    public void saveProducer(Producer producer){
+        producerRepository.saveAndFlush(producer);
+    }
+
+    public void deleteProducer(Long id){
+        producerRepository.deleteById(id);
+    }
 }

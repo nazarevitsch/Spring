@@ -12,10 +12,10 @@
     <title>Authorization</title>
 </head>
 <body>
-    <form>
+    <form name="auth-form">
         <ul>
-            <li>Username: <input id="username" type="text" name="username"></li>
-            <li>Password: <input id="password" type="password"  name="password"></li>
+            <li>Username: <label for="username"></label><input id="username" type="text" name="username"></li>
+            <li>Password: <label for="password"></label><input id="password" type="password" name="password"></li>
         </ul>
         <button type="button" onclick="dodo(this)">Sign IN</button>
     </form>
@@ -34,7 +34,7 @@
             console.log(resp.jwtToken);
             if (resp.jwtToken !== undefined) {
                 document.cookie = resp.jwtToken;
-                window.location.replace("/producers?Authorization=Bearer"+resp.jwtToken);
+                window.location.replace("/producers");
             }
         })
     }

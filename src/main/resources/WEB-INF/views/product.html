@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" />
+    <title>Products</title>
+</head>
+<body>
+<table border="1px">
+    <div id="navbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+            <li><a th:href="@{/}">Index</a></li>
+            <li><a th:href="@{/producers}">Producers</a></li>
+            <li><a th:href="@{/products}">Products</a></li>
+        </ul>
+    </div>
+    <tr>
+        <td>Id</td>
+        <td>Name</td>
+        <td>Price</td>
+        <td>Producer ID</td>
+        <td>Delete</td>
+    </tr>
+    <th:block th:each="product : ${products}">
+        <tr>
+            <td th:utext="${product.getId()}">.</td>
+            <td th:utext="${product.getName()}">.</td>
+            <td th:utext="${product.getPrice()}">.</td>
+            <td th:utext="${product.getProducerId()}">.</td>
+        </tr>
+    </th:block>
+</table>
+</body>
+</html>

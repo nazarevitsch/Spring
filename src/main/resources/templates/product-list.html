@@ -21,15 +21,6 @@
         <td>Producer ID</td>
         <td>Delete</td>
     </tr>
-    <c:forEach var="product" items="${products}">
-        <tr>
-            <td><c:out value="${developer.id}"/></td>
-            <td><c:out value="${developer.name}"/></td>
-            <td><c:out value="${developer.price}"/></td>
-            <td><c:out value="${developer.producerId}"/></td>
-            <td id="<c:out value='${developer.id}'/>"><button type="button" onclick="handleDelete(this)">Remove</button></td>
-        </tr>
-    </c:forEach>
 </table>
 <script type="text/javascript">
     function handleDelete(element) {

@@ -16,4 +16,12 @@ public class ProductService {
     public List<Product> findAllProducts(){
         return productRepository.findAll();
     }
+
+    public void saveProduct(Product product){
+        productRepository.saveAndFlush(product);
+    }
+
+    public void deleteProduct(Long id){
+        productRepository.deleteById(id);
+    }
 }
