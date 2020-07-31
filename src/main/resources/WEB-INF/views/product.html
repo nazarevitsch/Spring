@@ -7,6 +7,7 @@
 
     <link rel="stylesheet" type="text/css"
           th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" />
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <title>Products</title>
 </head>
 <body>
@@ -31,8 +32,28 @@
             <td th:utext="${product.getName()}">.</td>
             <td th:utext="${product.getPrice()}">.</td>
             <td th:utext="${product.getProducerId()}">.</td>
+            <td th:id="${product.getId()}">
+                <button type="button" th:onclick="'deleteProduct(' + ${product.getId()} + ');'"> Delete</button>
+            </td>
         </tr>
     </th:block>
 </table>
+
+<script>
+    function deleteProduct(id) {
+        $.ajax({
+            url: "/product/" + id,
+            type: "DELETE",
+            contentType: "application/json",
+            dataType : 'json',
+            success: () => {
+                location.reload();
+            },
+            error: (err) => {
+                console.log(err);
+            }
+        });
+    }
+</script>
 </body>
 </html>

@@ -43,6 +43,7 @@ public class ProducerController {
     @DeleteMapping("/producer/{id}")
     public ResponseEntity<Long> deleteProducer(@PathVariable("id") Long id){
         System.out.println("ID: " + id);
+        producerService.deleteProducer(id);
         return new ResponseEntity<>(id, HttpStatus.OK);
     }
 }

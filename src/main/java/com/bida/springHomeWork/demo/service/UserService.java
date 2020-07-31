@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityNotFoundException;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -31,6 +32,18 @@ public class UserService implements UserDetailsService {
     public User findByUsername(String username){
         return userRepository.findByUsername(username)
                 .orElseThrow(() -> new EntityNotFoundException("No user with username " + username));
+    }
+
+    public List<User> findAllUsers(){
+        return userRepository.findAll();
+    }
+
+    public void deleteUser(Long id){
+        userRepository.deleteById(id);
+    }
+
+    public void saveUser(User user){
+        userRepository.saveAndFlush(user);
     }
 
     public User save(UserRegistrationDTO registration){

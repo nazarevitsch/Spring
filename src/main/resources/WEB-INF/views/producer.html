@@ -11,7 +11,7 @@
     <title>Producers</title>
 </head>
 <body>
-<table border="1px">
+
     <div id="navbar" class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
             <li><a th:href="@{/}">Index</a></li>
@@ -19,6 +19,7 @@
             <li><a th:href="@{/products}">Products</a></li>
         </ul>
     </div>
+    <table border="1px">
     <tr>
         <td>Id</td>
         <td>Name</td>
@@ -36,18 +37,16 @@
 </table>
 
     <script>
-        function deleteProducer(element) {
-            console.log(element);
+        function deleteProducer(id) {
             $.ajax({
-                url: "/producer/" + element,
+                url: "/producer/" + id,
                 type: "DELETE",
                 contentType: "application/json",
                 dataType : 'json',
                 success: () => {
-                    console.log(22)
+                    location.reload();
                 },
                 error: (err) => {
-                    console.log("ERROR");
                     console.log(err);
                 }
             });

@@ -1,15 +1,16 @@
 package com.bida.springHomeWork.demo.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name = "products")
 public class Product {
 
     @Id
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name = "increment", strategy = "increment")
     @Column(name = "id")
     private long id;
 
@@ -21,7 +22,6 @@ public class Product {
 
     @Column(name = "producer_id")
     private long producerId;
-
 
     public long getId() {
         return id;
@@ -53,5 +53,15 @@ public class Product {
 
     public void setProducerId(long producerId) {
         this.producerId = producerId;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", producerId=" + producerId +
+                '}';
     }
 }
