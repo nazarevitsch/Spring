@@ -28,7 +28,6 @@ public class UserController {
 
     @PostMapping("/users")
     public String addNewUser(@ModelAttribute("user") User user){
-        System.out.println(user);
         userService.saveUser(user);
         return "redirect:/users";
     }
@@ -42,6 +41,18 @@ public class UserController {
     @DeleteMapping("/user/{id}")
     public ResponseEntity<Long> deleteUser(@PathVariable("id") Long id){
         userService.deleteUser(id);
+        return new ResponseEntity<>(id, HttpStatus.OK);
+    }
+
+    @PostMapping("/change_user_role_admin/{id}")
+    public ResponseEntity<Long> changeUserRoleToAdmin(@PathVariable("id") Long id){
+        userService.changeUserRoleToAdministrator(id);
+        return new ResponseEntity<>(id, HttpStatus.OK);
+    }
+
+    @PostMapping("/change_user_role_user/{id}")
+    public ResponseEntity<Long> changeUserRoleToUser(@PathVariable("id") Long id){
+        userService.changeUserRoleToUser(id);
         return new ResponseEntity<>(id, HttpStatus.OK);
     }
 }

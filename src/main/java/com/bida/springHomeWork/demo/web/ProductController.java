@@ -31,7 +31,6 @@ public class ProductController {
 
     @PostMapping("/products")
     public String saveProduct(@ModelAttribute("product") Product product){
-        System.out.println(product);
         productService.saveProduct(product);
         return "redirect:/products";
     }
@@ -44,7 +43,6 @@ public class ProductController {
 
     @DeleteMapping("/product/{id}")
     public ResponseEntity<Long> deleteProduct(@PathVariable("id") Long id){
-        System.out.println("ID: " + id);
         productService.deleteProduct(id);
         return new ResponseEntity<>(id, HttpStatus.OK);
     }

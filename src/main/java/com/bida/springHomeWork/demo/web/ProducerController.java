@@ -30,7 +30,6 @@ public class ProducerController {
 
     @PostMapping("/producers")
     public String saveProducer(@ModelAttribute("producer") Producer producer, BindingResult result){
-        System.out.println(producer);
         producerService.saveProducer(producer);
         return "redirect:/producers";
     }
@@ -42,7 +41,6 @@ public class ProducerController {
 
     @DeleteMapping("/producer/{id}")
     public ResponseEntity<Long> deleteProducer(@PathVariable("id") Long id){
-        System.out.println("ID: " + id);
         producerService.deleteProducer(id);
         return new ResponseEntity<>(id, HttpStatus.OK);
     }

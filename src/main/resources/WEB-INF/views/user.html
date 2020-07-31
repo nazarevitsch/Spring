@@ -27,6 +27,8 @@
             <td>Password</td>
             <td>Role</td>
             <td>DELETE</td>
+            <td>Change ROLE</td>
+            <td>Change ROLE</td>
         </tr>
         <th:block th:each="user : ${users}">
             <tr>
@@ -37,7 +39,13 @@
                 <td th:utext="${user.getPassword()}"></td>
                 <td th:utext="${user.getUserRole()}"></td>
                 <td>
-                <button type="button" th:onclick="'deleteUser(' + ${user.getId()} + ');'"> Delete</button>
+                    <button type="button" th:onclick="'deleteUser(' + ${user.getId()} + ');'"> Delete</button>
+                </td>
+                <td>
+                    <button type="button" th:onclick="'changeUserRoleToAdmin(' + ${user.getId()} + ');'">To ADMIN</button>
+                </td>
+                <td>
+                    <button type="button" th:onclick="'changeUserRoleToUser(' + ${user.getId()} + ');'">To USER</button>
                 </td>
             </tr>
         </th:block>
@@ -45,10 +53,35 @@
 
 <script>
     function deleteUser(id) {
-        console.log(id);
         $.ajax({
             url: "/user/" + id,
             type: "DELETE",
+            success: ()  => {
+                location.reload();
+            },
+            error: (err) => {
+                console.log(err)
+            }
+        });
+    }
+
+    function changeUserRoleToAdmin(id) {
+        $.ajax({
+            url: "/change_user_role_admin/" + id,
+            type: "POST",
+            success: ()  => {
+                location.reload();
+            },
+            error: (err) => {
+                console.log(err)
+            }
+        });
+    }
+
+    function changeUserRoleToUser(id) {
+        $.ajax({
+            url: "/change_user_role_user/" + id,
+            type: "POST",
             success: ()  => {
                 location.reload();
             },

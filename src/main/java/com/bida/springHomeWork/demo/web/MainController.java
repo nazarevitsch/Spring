@@ -12,8 +12,6 @@ public class MainController {
 
     @GetMapping("/")
     public String root(@RequestHeader Map<String, String> headers) {
-        System.out.println(headers.keySet());
-        System.out.println(headers.get("cookie"));
         return "index";
     }
 

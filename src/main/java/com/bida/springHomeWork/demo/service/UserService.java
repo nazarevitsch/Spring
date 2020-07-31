@@ -29,6 +29,14 @@ public class UserService implements UserDetailsService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    public void changeUserRoleToAdministrator(Long id){
+        userRepository.changeUserRoleToAdministrator(id);
+    }
+
+    public void changeUserRoleToUser(Long id){
+        userRepository.changeUserRoleToUser(id);
+    }
+
     public User findByUsername(String username){
         return userRepository.findByUsername(username)
                 .orElseThrow(() -> new EntityNotFoundException("No user with username " + username));
@@ -66,7 +74,6 @@ public class UserService implements UserDetailsService {
     }
 
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<UserRole> roles){
-        System.out.println("RRRR");
         return roles.stream()
                 .map(role -> new SimpleGrantedAuthority(role.name()))
                 .collect(Collectors.toList());
